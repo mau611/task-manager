@@ -14,13 +14,18 @@ const mainMenu = () => {
   console.log("1. Listar tareas");
   console.log("2. Añadir tarea");
   console.log("3. Eliminar tarea");
-  console.log("4. Salir");
+  console.log("4. Completar tarea");
+  console.log("5. Salir");
   rl.question("Elige una opción: ", (answer) => {
     if (answer === "1") {
       console.log("Tareas:");
       if (tareas.obtenerNumeroDeTareas() > 0) {
         tareas.obtenerTareas().forEach((tarea) => {
-          console.log(`${tarea.getId()}. ${tarea.getDescripcion()}`);
+          console.log(
+            `ID: ${tarea.getId()}, Descripcion: ${tarea.getDescripcion()}, Estado: ${
+              tarea.tareaRealizada() ? "Realizada" : "Por realizar"
+            }`
+          );
         });
       } else {
         console.log("Aun no se agregaron tareas.");
@@ -47,6 +52,19 @@ const mainMenu = () => {
         mainMenu();
       });
     } else if (answer === "4") {
+      rl.question(
+        "Ingrese el Id de la tarea que desea marcar como completada: ",
+        (id) => {
+          try {
+            tareas.completarTarea(parseInt(id));
+            console.log("Tarea completada con exito.");
+          } catch (error) {
+            console.log("No se encontro la tarea a completar.");
+          }
+          mainMenu();
+        }
+      );
+    } else if (answer === "5") {
       rl.close();
     } else {
       console.log("Opción no válida");
