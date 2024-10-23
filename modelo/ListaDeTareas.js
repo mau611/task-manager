@@ -6,6 +6,10 @@ class ListaDeTareas {
     this.#tareas = [];
   }
 
+  agregarTareaCompleta(tarea) {
+    this.#tareas.push(tarea);
+  }
+
   agregarTarea(descripcion) {
     if (typeof descripcion !== "string" || descripcion.trim() === "") {
       throw new Error("Ingrese una descripcion válida");

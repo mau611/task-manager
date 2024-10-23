@@ -38,4 +38,23 @@ router.put("/tareas/:id", (req, res) => {
   }
 });
 
+router.get("/tareas_pendientes", (req, res) => {
+  try {
+    const tareasPendientes = listaController.tareasPendientes();
+    let tareas = [];
+    tareasPendientes.forEach((tarea) => {
+      tareas.push({
+        ID: tarea.getId(),
+        Descripcion: tarea.getDescripcion(),
+        Estado: tarea.tareaRealizada() ? "Realizada" : "Pendiente",
+      });
+    });
+    res.status(200).send(tareas);
+  } catch (error) {
+    return res
+      .status(500)
+      .send({ error: "Ocurrió un error al obtener las tareas." });
+  }
+});
+
 module.exports = router;
