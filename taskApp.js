@@ -10,10 +10,11 @@ const rl = readline.createInterface({
 });
 
 const mainMenu = () => {
-  console.log("\nGestión de Tareas:");
+  console.log("\nGestión de Tareas, seleccione una opcion:");
   console.log("1. Listar tareas");
   console.log("2. Añadir tarea");
-  console.log("3. Salir");
+  console.log("3. Eliminar tarea");
+  console.log("4. Salir");
   rl.question("Elige una opción: ", (answer) => {
     if (answer === "1") {
       console.log("Tareas:");
@@ -27,11 +28,25 @@ const mainMenu = () => {
       mainMenu();
     } else if (answer === "2") {
       rl.question("Descripcion de la tarea: ", (descripcion) => {
-        tareas.agregarTarea(descripcion);
-        console.log("Tarea agregada con exito.");
+        try {
+          tareas.agregarTarea(descripcion);
+          console.log("Tarea agregada con exito.");
+        } catch (error) {
+          console.log("Por favor, ingrese una descripcion valida.");
+        }
         mainMenu();
       });
     } else if (answer === "3") {
+      rl.question("Ingrese el Id de la tarea que desea eliminar: ", (id) => {
+        try {
+          tareas.eliminarTarea(parseInt(id));
+          console.log("Tarea eliminada con exito.");
+        } catch (error) {
+          console.log("No se encontro la tarea a eliminar.");
+        }
+        mainMenu();
+      });
+    } else if (answer === "4") {
       rl.close();
     } else {
       console.log("Opción no válida");
