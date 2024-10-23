@@ -1,13 +1,12 @@
 const readline = require("readline");
-const ListaDeTareas = require("./modelo/ListaDeTareas");
-const Tarea = require("./modelo/Tarea");
-
-let tareas = new ListaDeTareas();
+const ListaController = require("./controlador/ListaController");
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
+
+const listaController = new ListaController();
 
 const mainMenu = () => {
   console.log("\nGestión de Tareas, seleccione una opcion:");
@@ -20,8 +19,8 @@ const mainMenu = () => {
   rl.question("Elige una opción: ", (answer) => {
     if (answer === "1") {
       console.log("Lista de tareas:");
-      if (tareas.obtenerNumeroDeTareas() > 0) {
-        tareas.obtenerTareas().forEach((tarea) => {
+      if (listaController.obtenerNumeroDeTareas() > 0) {
+        listaController.obtenerTareas().forEach((tarea) => {
           console.log(
             `ID: ${tarea.getId()}, Descripcion: ${tarea.getDescripcion()}, Estado: ${
               tarea.tareaRealizada() ? "Realizada" : "Pendiente"
@@ -35,7 +34,7 @@ const mainMenu = () => {
     } else if (answer === "2") {
       rl.question("Descripcion de la tarea: ", (descripcion) => {
         try {
-          tareas.agregarTarea(descripcion);
+          listaController.agregarTarea(descripcion);
           console.log("Tarea agregada con exito.");
         } catch (error) {
           console.log("Por favor, ingrese una descripcion valida.");
@@ -45,7 +44,7 @@ const mainMenu = () => {
     } else if (answer === "3") {
       rl.question("Ingrese el Id de la tarea que desea eliminar: ", (id) => {
         try {
-          tareas.eliminarTarea(parseInt(id));
+          listaController.eliminarTarea(parseInt(id));
           console.log("Tarea eliminada con exito.");
         } catch (error) {
           console.log("No se encontro la tarea a eliminar.");
@@ -57,7 +56,7 @@ const mainMenu = () => {
         "Ingrese el Id de la tarea que desea marcar como completada: ",
         (id) => {
           try {
-            tareas.completarTarea(parseInt(id));
+            listaController.completarTarea(parseInt(id));
             console.log("Tarea completada con exito.");
           } catch (error) {
             console.log("No se encontro la tarea a completar.");
@@ -66,7 +65,7 @@ const mainMenu = () => {
         }
       );
     } else if (answer === "5") {
-      const tareasPendientes = tareas.tareasPendientes();
+      const tareasPendientes = listaController.tareasPendientes();
       if (tareasPendientes.length > 0) {
         console.log("Lista de tareas pendientes:");
         tareasPendientes.forEach((tarea) => {
