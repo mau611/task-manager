@@ -15,12 +15,12 @@ class ListaController {
       const data = fs.readFileSync(archivoTareas, "utf-8");
       const tareasGuardadas = JSON.parse(data);
       tareasGuardadas.forEach((tarea) => {
-        const nuevaTarea = new Tarea(tarea.id, tarea.descripcion);
-        if (tarea.realizada) nuevaTarea.finalizarTarea();
-        this.tareas.agregarTarea(nuevaTarea.getDescripcion());
-        this.tareas
-          .obtenerTareas()
-          [this.tareas.obtenerNumeroDeTareas() - 1].setId(tarea.id);
+        const nuevaTarea = new Tarea(
+          tarea.id,
+          tarea.descripcion,
+          tarea.realizada
+        );
+        this.tareas.agregarTareaCompleta(nuevaTarea);
       });
     } catch (error) {
       console.log(
