@@ -14,4 +14,16 @@ router.post("/tareas", (req, res) => {
   }
 });
 
+router.delete("/tareas/:id", (req, res) => {
+  try {
+    listaController.eliminarTarea(parseInt(req.params.id));
+    res.status(200).send("Tarea eliminada exitosamente.");
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      error: "Ocurrio un error, verifique que el id proporcionado exista.",
+    });
+  }
+});
+
 module.exports = router;
