@@ -39,6 +39,10 @@ class Tarea {
   getId() {
     return this.#id;
   }
+
+  setId(id) {
+    this.#id = id;
+  }
 }
 
 module.exports = Tarea;
