@@ -22,22 +22,22 @@ const mainMenu = () => {
       if (listaController.obtenerNumeroDeTareas() > 0) {
         listaController.obtenerTareas().forEach((tarea) => {
           console.log(
-            `ID: ${tarea.getId()}, Descripcion: ${tarea.getDescripcion()}, Estado: ${
+            `ID: ${tarea.getId()}, Descripción: ${tarea.getDescripcion()}, Estado: ${
               tarea.tareaRealizada() ? "Realizada" : "Pendiente"
             }`
           );
         });
       } else {
-        console.log("Aun no se agregaron tareas.");
+        console.log("Aún no se agregaron tareas.");
       }
       mainMenu();
     } else if (answer === "2") {
-      rl.question("Descripcion de la tarea: ", (descripcion) => {
+      rl.question("Descripción de la tarea: ", (descripcion) => {
         try {
           listaController.agregarTarea(descripcion);
-          console.log("Tarea agregada con exito.");
+          console.log("Tarea agregada exitosamente.");
         } catch (error) {
-          console.log("Por favor, ingrese una descripcion valida.");
+          console.log("Por favor, ingrese una descripción valida.");
         }
         mainMenu();
       });
@@ -45,9 +45,9 @@ const mainMenu = () => {
       rl.question("Ingrese el Id de la tarea que desea eliminar: ", (id) => {
         try {
           listaController.eliminarTarea(parseInt(id));
-          console.log("Tarea eliminada con exito.");
+          console.log("Tarea eliminada con éxito.");
         } catch (error) {
-          console.log("No se encontro la tarea a eliminar.");
+          console.log("No se encontró la tarea a eliminar.");
         }
         mainMenu();
       });
@@ -57,9 +57,9 @@ const mainMenu = () => {
         (id) => {
           try {
             listaController.completarTarea(parseInt(id));
-            console.log("Tarea completada con exito.");
+            console.log("Tarea completada con éxito.");
           } catch (error) {
-            console.log("No se encontro la tarea a completar.");
+            console.log("No se encontró la tarea a completar.");
           }
           mainMenu();
         }
@@ -70,7 +70,7 @@ const mainMenu = () => {
         console.log("Lista de tareas pendientes:");
         tareasPendientes.forEach((tarea) => {
           console.log(
-            `ID: ${tarea.getId()}, Descripcion: ${tarea.getDescripcion()}, Estado: ${
+            `ID: ${tarea.getId()}, Descripción: ${tarea.getDescripcion()}, Estado: ${
               tarea.tareaRealizada() ? "Realizada" : "Pendiente"
             }`
           );

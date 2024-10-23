@@ -8,7 +8,7 @@ class ListaDeTareas {
 
   agregarTarea(descripcion) {
     if (typeof descripcion !== "string" || descripcion.trim() === "") {
-      throw new Error("Ingrese una descripcion valida");
+      throw new Error("Ingrese una descripcion válida");
     }
     const id = this.#tareas.length + 1;
     const nuevaTarea = new Tarea(id, descripcion);
