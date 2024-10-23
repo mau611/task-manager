@@ -24,6 +24,10 @@ class ListaDeTareas {
     return [...this.#tareas];
   }
 
+  tareasPendientes() {
+    return this.#tareas.filter((tarea) => !tarea.tareaRealizada());
+  }
+
   existeTarea(id) {
     return this.#tareas.find((tarea) => tarea.getId() === id);
   }
