@@ -24,17 +24,26 @@ class ListaDeTareas {
     return [...this.#tareas];
   }
 
+  existeTarea(id) {
+    return this.#tareas.find((tarea) => tarea.getId() === id);
+  }
+
   eliminarTarea(id) {
-    const tareaIndex = this.#tareas.findIndex((tarea) => tarea.getId() === id);
-    if (tareaIndex === -1) {
+    if (!this.existeTarea(id)) {
       throw new Error("No se encontró la tarea.");
     }
-
-    this.#tareas.splice(tareaIndex, 1);
-
+    this.#tareas = this.#tareas.filter((tarea) => tarea.getId() !== id);
     this.#tareas.forEach((tarea, index) => {
       tarea.setId(index + 1);
     });
+  }
+
+  completarTarea(id) {
+    const tarea = this.existeTarea(id);
+    if (!tarea) {
+      throw new Error("No se encontró la tarea.");
+    }
+    tarea.finalizarTarea();
   }
 }
 

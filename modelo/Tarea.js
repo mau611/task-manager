@@ -32,7 +32,7 @@ class Tarea {
     }
   }
 
-  isRealizada() {
+  tareaRealizada() {
     return this.#realizada;
   }
 
