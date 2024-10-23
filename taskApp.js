@@ -15,15 +15,16 @@ const mainMenu = () => {
   console.log("2. Añadir tarea");
   console.log("3. Eliminar tarea");
   console.log("4. Completar tarea");
-  console.log("5. Salir");
+  console.log("5. Listar tareas pendientes");
+  console.log("6. Salir");
   rl.question("Elige una opción: ", (answer) => {
     if (answer === "1") {
-      console.log("Tareas:");
+      console.log("Lista de tareas:");
       if (tareas.obtenerNumeroDeTareas() > 0) {
         tareas.obtenerTareas().forEach((tarea) => {
           console.log(
             `ID: ${tarea.getId()}, Descripcion: ${tarea.getDescripcion()}, Estado: ${
-              tarea.tareaRealizada() ? "Realizada" : "Por realizar"
+              tarea.tareaRealizada() ? "Realizada" : "Pendiente"
             }`
           );
         });
@@ -65,6 +66,21 @@ const mainMenu = () => {
         }
       );
     } else if (answer === "5") {
+      const tareasPendientes = tareas.tareasPendientes();
+      if (tareasPendientes.length > 0) {
+        console.log("Lista de tareas pendientes:");
+        tareasPendientes.forEach((tarea) => {
+          console.log(
+            `ID: ${tarea.getId()}, Descripcion: ${tarea.getDescripcion()}, Estado: ${
+              tarea.tareaRealizada() ? "Realizada" : "Pendiente"
+            }`
+          );
+        });
+      } else {
+        console.log("No existen tareas pendientes.");
+      }
+      mainMenu();
+    } else if (answer === "6") {
       rl.close();
     } else {
       console.log("Opción no válida");
