@@ -26,4 +26,16 @@ router.delete("/tareas/:id", (req, res) => {
   }
 });
 
+router.put("/tareas/:id", (req, res) => {
+  try {
+    listaController.completarTarea(parseInt(req.params.id));
+    res.status(200).send("Tarea completada con exitosamente.");
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      error: "Ocurrio un error, verifique que el id proporcionado exista.",
+    });
+  }
+});
+
 module.exports = router;
