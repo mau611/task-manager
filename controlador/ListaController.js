@@ -65,6 +65,10 @@ class ListaController {
   tareasPendientes() {
     return this.tareas.tareasPendientes();
   }
+
+  obtenerTareaPorId(id) {
+    return this.tareas.existeTarea(id);
+  }
 }
 
 module.exports = ListaController;
