@@ -1,3 +1,5 @@
+// Archivo que maneja la interfaz de lina de comandos para gestionar la aplicacion
+
 const readline = require("readline");
 const ListaController = require("./controlador/ListaController");
 

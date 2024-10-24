@@ -1,3 +1,5 @@
+// Controla la gestión de tareas, permite cargar y guardar tareas desde un archivo
+
 const fs = require("fs");
 const ListaDeTareas = require("../modelo/ListaDeTareas");
 const Tarea = require("../modelo/Tarea");
@@ -10,6 +12,7 @@ class ListaController {
     this.cargarTareasDesdeArchivo();
   }
 
+  // Lee tareas desde el archivo y las convierte a instancias de Tarea
   cargarTareasDesdeArchivo() {
     try {
       const data = fs.readFileSync(archivoTareas, "utf-8");
@@ -29,6 +32,7 @@ class ListaController {
     }
   }
 
+  // Convierte las tareas en formato JSON y las guarda en un archivo
   guardarTareasEnArchivo() {
     const tareas = this.tareas.obtenerTareas().map((tarea) => ({
       id: tarea.getId(),
@@ -38,6 +42,7 @@ class ListaController {
     fs.writeFileSync(archivoTareas, JSON.stringify(tareas, null, 2), "utf-8");
   }
 
+  // Agrega una nueva tarea y guarda el estado en el archivo
   agregarTarea(descripcion) {
     const nuevaTarea = this.tareas.agregarTarea(descripcion);
     this.guardarTareasEnArchivo();
@@ -72,3 +77,9 @@ class ListaController {
 }
 
 module.exports = ListaController;
+
+// Este archivo actúa como el controlador principal, encargándose de la coordinación entre la
+// lógica de negocio (ListaDeTareas) y la persistencia (lectura y escritura de archivos).
+// El uso de este controlador sigue el principio de separación de responsabilidades,
+// donde la lógica de negocio está desacoplada de la persistencia de datos, permitiendo una posible
+// evolución futura, como cambiar el almacenamiento sin afectar el resto de la aplicación.

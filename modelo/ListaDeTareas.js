@@ -1,3 +1,5 @@
+// Clase que representa una coleccion de tareas
+
 const Tarea = require("./Tarea");
 
 class ListaDeTareas {
@@ -6,6 +8,7 @@ class ListaDeTareas {
     this.#tareas = [];
   }
 
+  // Metodo para agregar una tarea creada al arreglo de tareas
   agregarTareaCompleta(tarea) {
     this.#tareas.push(tarea);
   }
@@ -32,6 +35,7 @@ class ListaDeTareas {
     return this.#tareas.filter((tarea) => !tarea.tareaRealizada());
   }
 
+  // Devuelve una tarea a modo de verificacion si es que esta existe dentro del arreglo de tareas
   existeTarea(id) {
     return this.#tareas.find((tarea) => tarea.getId() === id);
   }
@@ -56,3 +60,7 @@ class ListaDeTareas {
 }
 
 module.exports = ListaDeTareas;
+
+// Este archivo implementa la clase ListaDeTareas, que es responsable de gestionar un conjunto de tareas.
+// Se realizo un enfocado en facilitar la gestión de las tareas a través de métodos claros y bien definidos, manteniendo
+// la lista de tareas cohesiva y fácilmente manipulable

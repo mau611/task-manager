@@ -1,3 +1,5 @@
+// Clase que representa una tarea con sus atributos y modificadores de atributos
+
 class Tarea {
   #id;
   #descripcion;
@@ -46,3 +48,7 @@ class Tarea {
 }
 
 module.exports = Tarea;
+
+// En este archivo se encapsula la lógica de una tarea individual, siguiendo el principio de encapsulamiento.
+// Las propiedades privadas (#id, #descripcion, #completado) protegen el estado interno de la tarea
+// y se proporcionan métodos públicos para interactuar con la tarea (obtener atributos y marcarla como completada).
